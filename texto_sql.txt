@@ -1,0 +1,39 @@
+1- diagrama DER - Diagrama Entidade Relacionamento
+    --> Entidades: Retangulos (tabelas (ex: users))
+    --> Atributos: Colunas (ex: id, first_name, last_name, email)
+    --> PK: Chave primaria que nunca se repete
+    --> FK: Chave estrangeira
+    --> Relacionamento 1:1 | 1:N | N:N
+
+  |                      USERS                            |
+
+  |  id-     first_name-     last_name-     email-        |
+  |  1       Jorge           Silvinha       jor@email.com |    
+  |  2       Elson           Enfermeiro     els@email.com | 
+  |  3       Rogerio         Costa          rog@email.com |  
+  |  4       Rosalva         Silva          ros@email.com | 
+
+
+ 
+  |                     PROFILES                          |
+
+  |  id-     bio-            description-   FK user_id-   | 
+  |  1       Sou Jorge       Lorem ipsum      1           |    
+  |  2       Sou Elson       Lorem ipsum      2           | 
+  |  3       Sou Rosalva     Lorem ipsum      4           |  
+
+
+///////////////////////////////////////////////////////////////
+
+* instalar dbeaver
+  --> gerenciador de bancos de dados visual
+  --> semelhante ao que o phpMyAdmin faz para MySQL /
+  mas muito mais poderoso e compatível com dezenas de bancos
+
+  ! interface visual para trabalhar com bancos de dados SQL
+
+
+
+  infos: 
+
+  '('')' delimitam as colunas da tabela
