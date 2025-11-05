@@ -1,4 +1,4 @@
-1- diagrama DER - Diagrama Entidade Relacionamento
+* diagrama DER - Diagrama Entidade Relacionamento
     --> Entidades: Retangulos (tabelas (ex: users))
     --> Atributos: Colunas (ex: id, first_name, last_name, email)
     --> PK: Chave primaria que nunca se repete
@@ -25,7 +25,7 @@
 
 ///////////////////////////////////////////////////////////////
 
-* instalar dbeaver
+* dbeaver:
   --> gerenciador de bancos de dados visual
   --> semelhante ao que o phpMyAdmin faz para MySQL /
   mas muito mais poderoso e compatível com dezenas de bancos
@@ -40,10 +40,12 @@
         * Importa o módulo sqlite3, que permite /
         o Python se conectar e trabalhar com bancos de dados SQLite
 
+        * sqlite: tipo de banco de dados leve e local armazenado em arquivo
+
+
     --> from pathlib import Path: 
         * importa a classe Path do módulo pathlib /
-        que serve para trabalhar com caminhos de arquivos e /
-        pastas de forma mais segura
+        que serve para trabalhar com caminhos de arquivos (manipulando)
 
     --> ROOT_DIR = Path(__file__).parent: 
         * Cria um objeto Path que representa o diretório onde /
@@ -76,17 +78,9 @@
 
 
 
-
-
-
-
-
-
 * infos: 
 
   ! '('')' delimitam as colunas da tabela
   
-  ! sqlite: tipo de banco de dados leve e local
-        --> armazenado em arquivo
-
+  
      
