@@ -12,8 +12,8 @@ cursor = connection.cursor()
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
-    'id INTEGER PRIMARY KEY AUTOINCREMENT, '
-    'name TEXT, '
+    'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+    'name TEXT,'
     'age INTEGER'
     ')'
 )
@@ -23,7 +23,8 @@ connection.commit()
 cursor.execute(
     f'INSERT INTO {TABLE_NAME} (id, name, age)'
     'VALUES'
-    '(NULL, "Jhonny Emici", 45), (NULL, "Xamuel Silva", 12)'
+    '(NULL, "Jhonny Emici", 45)'
+    '(NULL, "Xamuel Silva", 12)'
 )
 connection.commit()
 

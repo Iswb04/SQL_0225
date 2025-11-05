@@ -34,6 +34,59 @@
 
 
 
-  infos: 
+* linhas de codigo importantes:
 
-  '('')' delimitam as colunas da tabela
+    --> import sqlite3: 
+        * Importa o módulo sqlite3, que permite /
+        o Python se conectar e trabalhar com bancos de dados SQLite
+
+    --> from pathlib import Path: 
+        * importa a classe Path do módulo pathlib /
+        que serve para trabalhar com caminhos de arquivos e /
+        pastas de forma mais segura
+
+    --> ROOT_DIR = Path(__file__).parent: 
+        * Cria um objeto Path que representa o diretório onde /
+        está o arquivo Python sendo executado.
+        * __file__ : caminho do arquivo atual
+        * .parent : pega a pasta onde o arquivo está
+
+    --> DB_NAME = ...
+        * define o nome do arquivo do banco de dados
+
+    --> DB_FILE = ROOT_DIR / DB_NAME
+        * Usa o operador / do Path (que junta caminhos) para criar /
+        o caminho completo do arquivo do banco de dados dentro da pasta /
+        do projeto
+            --> Exemplo: C:\meuprojeto\db.sqlite3
+      
+    --> TABLE_NAME = ...
+        * Define o nome da tabela
+
+    --> connection = sqlite3.connect(DB_FILE):
+        * Abre (ou cria, se não existir) o arquivo de banco de dados /
+        SQLite indicado por DB_FILE.
+        * O retorno é um objeto de conexão (connection) que permite /
+         enviar comandos SQL ao banco.
+
+    --> cursor = connection.cursor()
+        * Cria um cursor, que é um objeto usado para executar /
+        comandos SQL (como CREATE TABLE, INSERT, SELECT, etc.)
+
+
+
+
+
+
+
+
+
+
+* infos: 
+
+  ! '('')' delimitam as colunas da tabela
+  
+  ! sqlite: tipo de banco de dados leve e local
+        --> armazenado em arquivo
+
+     
