@@ -79,8 +79,33 @@
 
 
 * infos: 
+ 
+--------------------------------------------------------
+CUIDADO: delete sem where apaga tudo da tabela !
 
-  ! '('')' delimitam as colunas da tabela
-  
-  
-     
+cursor.execute(
+    f'''
+    DELETE FROM {TABLE_NAME}
+    '''
+)
+connection.commit()
+
+--------------------------------------------------------
+RECOMEÇAR SEQUENCIA: tem que apagar tudo antes
+
+cursor.execute(
+    f'''
+    DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"
+    '''
+)
+connection.commit()
+
+
+--------------------------------------------------------
+* execute: um valor []
+* executemany: varios valores [[]]
+* usar tupla pois evita alterações acidentais ou maliciosas (imutavel)
+* LIMIT (numero): limita a quantidade de itens da tabela no select
+* felchall = pega todos os dados de um pesquisa SQL (for row in rows)
+* fetchone = pega apenas um registro (print(row))
+* WHERE: filtra a busca (id= "2": procura o item com o id 2)
