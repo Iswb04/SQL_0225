@@ -61,3 +61,10 @@ Remove-Item -Recurse -Force build, dist, __pycache__, league_view.spec -ErrorAct
 
 
 
+* pip install eel: O Eel é uma ponte entre o Python e o navegador.
+:: Ele deixa o Python rodar “por trás” (como servidor) e o HTML/CSS/JS serem a parte visual.
+
+
+
+CRIAR COLUNA DE VANTAGEM !!!
+

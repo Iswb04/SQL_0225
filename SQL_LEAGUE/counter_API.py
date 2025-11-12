@@ -192,3 +192,5 @@ def get_all_counters():
 
 # http://127.0.0.1:8000/counters
 # uvicorn counter_API:app --reload
+
+
