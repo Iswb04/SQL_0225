@@ -100,7 +100,6 @@ cursor.execute(
 )
 connection.commit()
 
-
 --------------------------------------------------------
 * execute: um valor []
 * executemany: varios valores [[]]
@@ -109,3 +108,10 @@ connection.commit()
 * felchall = pega todos os dados de um pesquisa SQL (for row in rows)
 * fetchone = pega apenas um registro (print(row))
 * WHERE: filtra a busca (id= "2": procura o item com o id 2)
+* CAST: utilizado para converter um dado 
+       - (CAST ... AS INTEGER)
+       - (SLECT CAST('2011' AS INTEGER))
+* substr: é usada para pegar apenas uma parte de uma string.
+       - CAST(substr(RELEASE_DATE, 7, 4) AS INTEGER) ASC
+* if __name__ == '__main__': Serve para executar um bloco de código apenas /
+quando o arquivo é executado diretamente, e não quando ele é importado

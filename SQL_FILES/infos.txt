@@ -1,0 +1,52 @@
+
+import requests # usado para requisições HTTPS (baixar dados de uma URL)
+
+URL = "https://ddragon.leagueoflegends.com/cdn/14.1.1/data/pt_BR/champion.json" 
+# API ESTÁTICA | PÚBLICA != API DINÂMICA
+
+
+resp = requests.get(URL) #baixa o arquivo JSON!
+resp.raise_for_status() # verificação de erros!
+data = resp.json() # transforma o texto JSON recebido da API em um \
+                   # objeto Python (dicionário)
+
+
+champions = data["data"]  # chave data = infos dos campeões
+
+for champ_key, champ_info in champions.items(): # retorna (chave, valor)
+    nome = champ_info["name"]
+    titulo = champ_info.get("title", "")
+    tags = champ_info.get("tags", []) 
+
+    print(f"{nome} — {titulo} — {tags}")
+
+
+
+
+
+FastAPI - biblioteca Python para criar APIs web
+    -- pip install fastapi uvicorn >>>> servidor Uvicorn, que roda a aplicação FastAP
+        * uvicorn main:app --reload
+        * http://127.0.0.1:8000/counters/Ahri
+
+
+
+
+    -- pip install beautifulsoup4 
+    # biblioteca Python para web scraping — ou seja /
+     ela serve pra ler e extrair informações de páginas da web (HTML)
+
+
+
+-------------------------------------------------------- counters infos
+
+def get_counters(champion_name: str): # função quando alguem acessar o endpoint
+    champion_name = champion_name.capitalize()  # para padronizar
+
+    if champion_name not in COUNTERS:
+        raise HTTPException(status_code=404, detail="Champion not found") # erro caso n seja encontrado!
+     
+    return {
+        "champion": champion_name,
+        "counters": COUNTERS[champion_name]
+    }

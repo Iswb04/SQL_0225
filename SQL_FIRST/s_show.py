@@ -16,4 +16,5 @@ else:
 
 
 cursor.close()
+
 connection.close()
