@@ -50,3 +50,14 @@ def get_counters(champion_name: str): # função quando alguem acessar o endpoin
         "champion": champion_name,
         "counters": COUNTERS[champion_name]
     }
+
+
+
+pip install pyinstaller : trasforma scripts (py) em executaveis (exe)
+cd "C:\Users\isabella.rocha\Documents\GitHub\SQL_0225\SQL_LEAGUE"
+pyinstaller --onefile --noconsole --icon="icone_lol.ico" league_view.py
+
+Remove-Item -Recurse -Force build, dist, __pycache__, league_view.spec -ErrorAction SilentlyContinue
+
+
+
