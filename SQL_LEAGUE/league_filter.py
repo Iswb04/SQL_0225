@@ -55,7 +55,7 @@ cursor = connection.cursor()
 
 cursor.execute(
     f'''SELECT NAME, COUNTERS FROM {TABLE_NAME}
-    WHERE NAME LIKE '%seraphine%'
+    WHERE COUNTERS LIKE '%desconhecido%'
 '''
 )
 
@@ -64,6 +64,17 @@ cursor.execute(
     f'''SELECT NAME, TAGS FROM {TABLE_NAME}
     WHERE NAME LIKE '%nautilus%'
 '''
+)"""
+
+
+
+
+"""ALTER TABLE nome_da_tabela
+DROP COLUMN advantages;"""
+
+"""cursor.execute(
+        f'''ALTER TABLE {TABLE_NAME}
+        ADD COLUMN advantages TEXT; '''
 )"""
 
 

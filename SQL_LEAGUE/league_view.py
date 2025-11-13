@@ -8,13 +8,12 @@ from pathlib import Path
 
 # Detecta se está rodando como .exe (PyInstaller)
 if getattr(sys, 'frozen', False):
-    ROOT_DIR = Path(sys._MEIPASS)  # pasta temporária
-    EXEC_DIR = Path(os.path.dirname(sys.executable))  # onde está o .exe
+    ROOT_DIR = Path(sys._MEIPASS)
+    EXEC_DIR = Path(os.path.dirname(sys.executable))
 else:
     ROOT_DIR = Path(__file__).resolve().parent
     EXEC_DIR = ROOT_DIR
 
-# Usa o diretório do executável para achar o banco
 DB_FILE = EXEC_DIR / 'db.sqleague'
 TABLE_NAME = 'Champions'
 
@@ -23,15 +22,14 @@ class LeagueApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("League of Legends - Champions Infos")
-        self.geometry("750x500")
+        self.geometry("850x500")
         self.configure(bg="#18293B")
 
-        print(f"[DEBUG] Banco de dados procurado em: {DB_FILE}")  # útil pra debug
+        print(f"[DEBUG] Banco de dados procurado em: {DB_FILE}")
 
         self.create_widgets()
 
     def create_widgets(self):
-        # Título
         title_label = tk.Label(
             self,
             text="Banco de Campeões",
@@ -41,7 +39,6 @@ class LeagueApp(tk.Tk):
         )
         title_label.pack(pady=15)
 
-        # Frame de busca
         search_frame = tk.Frame(self, bg="#101820")
         search_frame.pack(pady=10)
 
@@ -50,31 +47,46 @@ class LeagueApp(tk.Tk):
         self.search_entry.pack(side=tk.LEFT, padx=5)
         ttk.Button(search_frame, text="Buscar", command=self.search_champion).pack(side=tk.LEFT)
 
-        # 🔹 Permitir pressionar Enter para pesquisar
         self.search_entry.bind("<Return>", lambda event: self.search_champion())
 
-        # Tabela (removendo a coluna 'id')
+        # Criação da Treeview
         self.tree = ttk.Treeview(
             self,
-            columns=("name", "title", "tags", "counters"),
+            columns=("name", "title", "tags", "counters", "advantages"),
             show="headings"
         )
 
-        # Cabeçalhos
+        # Cabeçalhos normais
         self.tree.heading("name", text="Nome")
         self.tree.heading("title", text="Título")
         self.tree.heading("tags", text="Funções")
-        self.tree.heading("counters", text="Counters")
+
+        # Criar quadradinhos coloridos para as colunas
+        # Vermelho (counter)
+        red_square = tk.PhotoImage(width=10, height=10)
+        red_square.put(("red",), to=(0, 0, 10, 10))
+
+        # Verde (advantage)
+        green_square = tk.PhotoImage(width=10, height=10)
+        green_square.put(("green",), to=(0, 0, 10, 10))
+
+        # Armazena imagens para não perder referência
+        self.red_square = red_square
+        self.green_square = green_square
+
+        # Cabeçalhos com ícones coloridos
+        self.tree.heading("counters", text="  Counters", image=self.red_square, anchor="w")
+        self.tree.heading("advantages", text="  Advantages", image=self.green_square, anchor="w")
 
         # Largura das colunas
-        self.tree.column("name", width=150, anchor="w")
+        self.tree.column("name", width=90, anchor="w")
         self.tree.column("title", width=180, anchor="w")
         self.tree.column("tags", width=150, anchor="w")
-        self.tree.column("counters", width=250, anchor="w")
+        self.tree.column("counters", width=200, anchor="w")
+        self.tree.column("advantages", width=200, anchor="w")
 
         self.tree.pack(expand=True, fill="both", padx=10, pady=10)
 
-        # Botão listar todos
         ttk.Button(self, text="Listar Todos", command=self.load_all).pack(pady=5)
 
     def search_champion(self):
@@ -91,9 +103,8 @@ class LeagueApp(tk.Tk):
         cursor = connection.cursor()
 
         try:
-            # 🔹 Removido 'id' da consulta
             cursor.execute(
-                f"SELECT name, title, tags, counters FROM {TABLE_NAME} WHERE name LIKE ?",
+                f"SELECT name, title, tags, counters, advantages FROM {TABLE_NAME} WHERE name LIKE ?",
                 (f"%{name}%",)
             )
             rows = cursor.fetchall()
@@ -103,7 +114,6 @@ class LeagueApp(tk.Tk):
             return
 
         connection.close()
-
         self.tree.delete(*self.tree.get_children())
 
         if rows:
@@ -121,8 +131,7 @@ class LeagueApp(tk.Tk):
         cursor = connection.cursor()
 
         try:
-            # 🔹 Removido 'id' da consulta
-            cursor.execute(f"SELECT name, title, tags, counters FROM {TABLE_NAME}")
+            cursor.execute(f"SELECT name, title, tags, counters, advantages FROM {TABLE_NAME}")
             rows = cursor.fetchall()
         except sqlite3.OperationalError as e:
             messagebox.showerror("Erro no Banco", f"Ocorreu um erro:\n{e}")
@@ -130,7 +139,6 @@ class LeagueApp(tk.Tk):
             return
 
         connection.close()
-
         self.tree.delete(*self.tree.get_children())
 
         for r in rows:
@@ -140,4 +148,3 @@ class LeagueApp(tk.Tk):
 if __name__ == "__main__":
     app = LeagueApp()
     app.mainloop()
-

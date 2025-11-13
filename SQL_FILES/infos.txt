@@ -66,5 +66,5 @@ Remove-Item -Recurse -Force build, dist, __pycache__, league_view.spec -ErrorAct
 
 
 
-CRIAR COLUNA DE VANTAGEM !!!
+
 
